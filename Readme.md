@@ -120,14 +120,3 @@ streamlit run persona.py
 
 This project is open source and available under the [MIT License](LICENSE).
 
-## 🤝 Contributing
-
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](../../issues).
-
-## 📞 Support
-
-If you have any questions or need help, please open an issue or reach out on Twitter.
-
----
-
-**Made with ❤️ and AI**
