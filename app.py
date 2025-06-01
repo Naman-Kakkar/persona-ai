@@ -11,7 +11,7 @@ load_dotenv()
 st.set_page_config(
     page_title="Hitesh Choudhary AI | LearnCodeOnline",
     page_icon="🚀",
-    layout="wide",
+    layout="centered",
     initial_sidebar_state="collapsed"
 )
 
@@ -21,23 +21,22 @@ st.markdown("""
     /* Import Google Fonts */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
     
-    /* Root variables */
     :root {
-        --primary-color: #6366f1;
-        --secondary-color: #8b5cf6;
-        --accent-color: #f59e0b;
-        --bg-dark: #0f172a;
-        --bg-card: #1e293b;
-        --text-primary: #f8fafc;
-        --text-secondary: #cbd5e1;
-        --border-color: #334155;
-    }
+    --primary-color: #b06c49;       /* Warm brown */
+    --secondary-color: #8a4b2f;     /* Darker brown */
+    --accent-color: #d9a066;        /* Soft orange-beige */
+    --bg-dark: #2c2a29;             /* Dark charcoal brown */
+    --bg-card: #3d3a38;             /* Medium dark brown-gray */
+    --text-primary: #f0e6db;        /* Warm off-white */
+    --text-secondary: #cbbfbb;      /* Soft beige */
+    --border-color: #5a4031;        /* Deep brown */
+}
+
     
-    /* Main background */
     .stApp {
-        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-        font-family: 'Inter', sans-serif;
-    }
+    background: linear-gradient(135deg, #2c2a29 0%, #8a4b2f 100%);
+    font-family: 'Inter', sans-serif;
+}
     
     /* Hide Streamlit header and footer */
     header[data-testid="stHeader"] {
@@ -617,16 +616,6 @@ chat_container = st.container()
 
 with chat_container:
     
-    # Show welcome message if no chat history
-    if not st.session_state.chat_history:
-        st.markdown("""
-        <div class="welcome-message">
-            <h3>🙏 Namaste! Main Hitesh hoon</h3>
-            <p>Coding, career, ya life ke bare mein kuch bhi pooch sakte ho. Main yahan hoon help karne ke liye!</p>
-            <p><strong>Try asking:</strong> "React kaise seekhun?", "Career guidance chahiye", "Coding se dar lagta hai"</p>
-        </div>
-        """, unsafe_allow_html=True)
-    
     # Display chat history
     for i, message in enumerate(st.session_state.chat_history):
         if message["role"] == "user":
@@ -636,8 +625,6 @@ with chat_container:
     
     st.markdown('</div>', unsafe_allow_html=True)
 
-# Input section
-st.markdown("---")
 
 # Create form to handle Enter key submission
 with st.form(key="chat_form", clear_on_submit=True):
@@ -708,14 +695,4 @@ with col1:
         st.session_state.message_count = 0
         st.rerun()
 
-with col2:
-    if st.button("💡 Example Questions", help="Get some conversation starters"):
-        st.info("""
-        **Try asking Hitesh bhai:**
-        - "React kaise seekhun from scratch?"
-        - "Career guidance chahiye, confused hoon"
-        - "Coding interview ki preparation kaise karun?"
-        - "Burnout ho gaya hai, kya karun?"
-        - "Open source contribute karna hai"
-        - "YouTube channel start karna chahta hoon"
-        """)
+
