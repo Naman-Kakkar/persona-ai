@@ -10,7 +10,6 @@ load_dotenv()
 # Configure Streamlit page
 st.set_page_config(
     page_title="Hitesh Choudhary AI | LearnCodeOnline",
-    page_icon="🚀",
     layout="centered",
     initial_sidebar_state="collapsed"
 )
@@ -606,8 +605,8 @@ if "processing" not in st.session_state:
 # Header
 st.markdown("""
 <div class="main-header">
-    <h1>🚀 Hitesh Choudhary AI</h1>
-    <p>Your coding mentor & career guide - LearnCodeOnline ke saath</p>
+    <h1> Hitesh Choudhary </h1>
+    <p>Your advisor in coding.</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -633,14 +632,14 @@ with st.form(key="chat_form", clear_on_submit=True):
     with col1:
         user_input = st.text_input(
             "",
-            placeholder="Hitesh bhai se kuch poochiye... ",
+            placeholder="dikat batao... ",
             label_visibility="collapsed",
             disabled=st.session_state.processing
         )
     
     with col2:
         send_button = st.form_submit_button(
-            "Send 🚀", 
+            "Ask ", 
             use_container_width=True,
             disabled=st.session_state.processing
         )
@@ -648,7 +647,7 @@ with st.form(key="chat_form", clear_on_submit=True):
 # Handle form submission
 if send_button and user_input.strip() and not st.session_state.processing:
     if model is None:
-        st.error("❌ Gemini client not initialized. Please check your API key configuration.")
+        st.error("Gemini client not initialized. Please check your API key configuration.")
     else:
         # Set processing state
         st.session_state.processing = True
@@ -661,7 +660,7 @@ if send_button and user_input.strip() and not st.session_state.processing:
         
         # Get AI response
         try:
-            with st.spinner("🤔 Hitesh bhai is thinking..."):
+            with st.spinner("Hitesh bhai is thinking..."):
                 # Start a chat session with the model history
                 convo = model.start_chat(history=st.session_state.messages)
                 response = convo.send_message(user_input.strip()) # Send the latest user message
@@ -675,8 +674,8 @@ if send_button and user_input.strip() and not st.session_state.processing:
                 st.session_state.message_count += 1
                 
         except Exception as e:
-            st.error(f"❌ Oops! Something went wrong: {str(e)}")
-            st.error("💡 Please make sure your Google API key is set correctly in your .env file and the model is accessible.")
+            st.error(f"Oops! Something went wrong: {str(e)}")
+            st.error("Please make sure your Google API key is set correctly in your .env file and the model is accessible.")
         
         finally:
             # Reset processing state
@@ -689,7 +688,7 @@ if send_button and user_input.strip() and not st.session_state.processing:
 col1, col2 = st.columns(2)
 
 with col1:
-    if st.session_state.chat_history and st.button("🗑️ Clear Chat", help="Start a fresh conversation"):
+    if st.session_state.chat_history and st.button("Clear Chat", help="Start a fresh conversation"):
         st.session_state.chat_history = []
         st.session_state.messages = [{"role": "user", "parts": [SYSTEM_PROMPT]}] # Reset messages for Gemini
         st.session_state.message_count = 0
