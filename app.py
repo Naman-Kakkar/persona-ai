@@ -633,7 +633,7 @@ with st.form(key="chat_form", clear_on_submit=True):
     with col1:
         user_input = st.text_input(
             "",
-            placeholder="Hitesh bhai se kuch poochiye... (Type your message and press Enter)",
+            placeholder="Hitesh bhai se kuch poochiye... ",
             label_visibility="collapsed",
             disabled=st.session_state.processing
         )
