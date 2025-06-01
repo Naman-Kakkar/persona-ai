@@ -116,7 +116,7 @@ st.markdown("""
     }
     
     .hitesh-message::before {
-        content: "👨‍💻 Hitesh Bhai";
+        content: "Hitesh Bhai";
         display: block;
         font-weight: 600;
         color: var(--accent-color);
