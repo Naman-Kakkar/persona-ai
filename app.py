@@ -9,7 +9,7 @@ load_dotenv()
 
 # Configure Streamlit page
 st.set_page_config(
-    page_title="Hitesh Choudhary AI | LearnCodeOnline",
+    page_title="Hitesh Choudhary AI",
     layout="centered",
     initial_sidebar_state="collapsed"
 )
