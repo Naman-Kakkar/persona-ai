@@ -1,22 +1,24 @@
-# 🧠 AI Persona – Chat with Hitesh Choudhary (AI Clone)
+# 🧠 AI Persona – Chat with Hitesh Choudhary (Gemini AI Clone)
 
 An interactive web-based chatbot that mimics the **personality, tone, and storytelling style** of a real person. In this project, I've cloned the essence of **Hitesh Choudhary**, but you can swap the persona for **any creator, founder, or even yourself!**
 
 ## 🧰 Tools You'll Need
 
-- **🧠 OpenAI API** – For generating responses using GPT models  
+- **🧠 Gemini API (Google Generative AI)** – For generating responses using Gemini models  
 - **🌐 Streamlit** – For building a fast, clean web UI  
 - **🔐 python-dotenv** – For loading environment variables securely  
 - **💻 Python (>=3.8)** – Your core programming language
 
 ## 📁 Project Structure
 
+
+
 ```
 ai-persona/
-├── persona.py                    # Main Streamlit app
-├── .env                         # Store your OpenAI API key
+├── persona.py # Main Streamlit app
+├── .env # Store your Gemini API key
 ├── prompts/
-│   └── hitesh_examples.json     # ~40 examples of how Hitesh speaks
+│ └── hitesh_examples.json # ~40 examples of how Hitesh speaks
 ├── requirements.txt
 └── README.md
 ```
@@ -32,8 +34,8 @@ source venv/bin/activate  # Windows: venv\Scripts\activate
 
 ### 2️⃣ Install Dependencies
 
-```bash
-pip install streamlit openai python-dotenv
+```
+pip install streamlit google-generativeai python-dotenv
 ```
 
 ### 3️⃣ Add Your API Key
@@ -41,7 +43,7 @@ pip install streamlit openai python-dotenv
 Create a `.env` file:
 
 ```env
-OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxxxx
+GEMINI_API_KEY=your-gemini-api-key-here
 ```
 
 ### 4️⃣ Prompt Engineering is the 💖
@@ -65,17 +67,18 @@ Example prompt:
 }
 ```
 
-### 5️⃣ Main Streamlit App (persona.py)
+### 5️⃣ Main Streamlit App (app.py)
 
 ```python
 import streamlit as st
-from openai import OpenAI
+import google.generativeai as genai
 from dotenv import load_dotenv
 import os
 import json
 
 load_dotenv()
-client = OpenAI()
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+model = genai.GenerativeModel("gemini-pro")
 
 SYSTEM_PROMPT = """
 You are an AI version of Hitesh Choudhary.
@@ -92,18 +95,15 @@ if query:
     with open("prompts/hitesh_examples.json", "r") as f:
         examples = json.load(f)
     
-    messages = [
-        {"role": "system", "content": SYSTEM_PROMPT}
-    ] + examples + [
-        {"role": "user", "content": query}
-    ]
+    history = [{"role": "user", "parts": SYSTEM_PROMPT}]
     
-    response = client.chat.completions.create(
-        model="gpt-4",
-        messages=messages
-    )
-    
-    st.write(response.choices[0].message.content)
+    for example in examples:
+        history.append({"role": example["role"], "parts": example["content"]})
+
+    history.append({"role": "user", "parts": query})
+
+    response = model.generate_content(history)
+    st.write(response.text)
 ```
 
 ### 6️⃣ Run the App 🚀
@@ -112,37 +112,9 @@ if query:
 streamlit run persona.py
 ```
 
-Visit: `http://localhost:8501`
 
 **Boom 💥** — your own Hitesh AI clone is live!
 
-## 🧠 Modify It For Yourself
-
-Want to create your own AI Persona?
-
-Just update:
-- The `SYSTEM_PROMPT` with your tone
-- Feed in 10–50 prompt-response pairs matching your style
-
-Example prompt change:
-
-```python
-SYSTEM_PROMPT = "You are AI version of [Your Name]. You use Gen Z slang, emojis, and joke a lot."
-```
-
-## 🧪 Test the Live Demo
-
-🔗 [Try the AI Persona Demo](https://perosna-ai-vwfxavyehtbnwuwt53rywj.streamlit.app/)
-
-## 🙌 Final Thoughts
-
-- You don't need to host or train a full LLM to build a custom AI
-- Just prompt smartly + use OpenAI + Streamlit
-- Whether it's your mentor, a favorite creator, or your own clone — the possibilities are endless
-
-🔥 **If you build your own, tag me on X (Twitter) with #AIPersona – I'd love to see it!**
-
-Happy building! 🚀
 
 ## 📄 License
 
