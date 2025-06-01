@@ -1,4 +1,4 @@
-# 🧠 AI Persona – Chat with Hitesh Choudhary (Gemini AI Clone)
+# 🧠 AI Persona – Chat with Hitesh Choudhary
 
 An interactive web-based chatbot that mimics the **personality, tone, and storytelling style** of a real person. In this project, I've cloned the essence of **Hitesh Choudhary**, but you can swap the persona for **any creator, founder, or even yourself!**
 
